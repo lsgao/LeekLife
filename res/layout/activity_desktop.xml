@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:attr="http://schemas.android.com/apk/res/life.leek.launcher"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="#000000"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/title_desktop"
+        android:layout_width="1050dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="top"
+        android:gravity="center" >
+
+        <life.leek.launcher.customwidget.TitleBar
+            android:id="@+id/titlebar_desktop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
+    </RelativeLayout>
+    <!--
+    <GridView
+        android:id="@+id/apps_list_desktop"
+        android:layout_width="860dp"
+        android:layout_height="420dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+		android:layout_below="@+id/title_desktop"
+		android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:columnWidth="200dp"
+        android:stretchMode="columnWidth"
+        android:numColumns="4" >
+    </GridView>    -->
+
+    <RelativeLayout
+        android:id="@+id/main_desktop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <ImageView
+            android:id="@+id/logo_small_desktop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/imagedescription"
+            android:src="@drawable/small_logo"
+            android:visibility="visible" />
+
+        <RelativeLayout
+            android:id="@+id/apps_desktop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo_small_desktop"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true" >
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app1_desktop"
+                android:layout_width="300dp"
+                android:layout_height="490dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/app1"
+                android:visibility="gone"
+                attr:index="1" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app2_desktop"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/app1_desktop"
+                android:background="@drawable/app2"
+                android:visibility="gone"
+                attr:index="2" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app3_desktop"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/app2_desktop"
+                android:background="@drawable/app3"
+                android:visibility="gone"
+                attr:index="3" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app4_desktop"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/app3_desktop"
+                android:background="@drawable/app4"
+                android:visibility="gone"
+                attr:index="4" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app5_desktop"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_below="@+id/app2_desktop"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/app1_desktop"
+                android:background="@drawable/app5"
+                android:visibility="gone"
+                attr:index="5" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app6_desktop"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_below="@+id/app3_desktop"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/app5_desktop"
+                android:background="@drawable/app6"
+                android:visibility="gone"
+                attr:index="6" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app7_desktop"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_below="@+id/app4_desktop"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/app6_desktop"
+                android:background="@drawable/app7"
+                android:visibility="gone"
+                attr:index="7" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
