@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import life.leek.launcher.R;
-import life.leek.launcher.setting.DynamicSetting;
+import life.leek.launcher.setting.Setting;
 import life.leek.launcher.setting.GlobalVariable;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -47,7 +47,7 @@ public class TitleBar extends FrameLayout {
 	 * 更新屏幕上的当前时间
 	 */
 	public void updateTime() {
-		SimpleDateFormat sdf = new SimpleDateFormat(DynamicSetting.FORMAT_CURRENT_TIME, Locale.getDefault());
+		SimpleDateFormat sdf = new SimpleDateFormat(Setting.FORMAT_CURRENT_TIME, Locale.getDefault());
 		timeTextView.setText(sdf.format(new Date()));
 	}
 	public void updateWifiStatus(int resId) {

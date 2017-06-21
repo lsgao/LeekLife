@@ -1,18 +1,18 @@
 package life.leek.launcher.utils;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
 import life.leek.launcher.R;
-import life.leek.launcher.setting.DynamicSetting;
+import life.leek.launcher.service.DownloadApkIntentService;
 import life.leek.launcher.setting.GlobalVariable;
+import life.leek.launcher.setting.Setting;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.util.Log;
 
 public class CommonUtil {
@@ -37,8 +37,8 @@ public class CommonUtil {
 	 * @return
 	 */
 	public static int findApp(String package_name) {
-		for (int i = 0; i < DynamicSetting.APP_ARRAY[0].length; i++) {
-			String str = DynamicSetting.APP_ARRAY[0][i];
+		for (int i = 0; i < Setting.APP_ARRAY[0].length; i++) {
+			String str = Setting.APP_ARRAY[0][i];
 			String[] packageNames = str.split(",");
 			for (String packageName : packageNames) {
 				if (packageName.equals(package_name)) {
@@ -47,33 +47,6 @@ public class CommonUtil {
 			}
 		}
 		return -1;
-	}
-
-	public static void getWifiInfo(Context context) {
-		WifiInfo wifiInfo = ((WifiManager) context
-				.getSystemService(Context.WIFI_SERVICE)).getConnectionInfo();
-		if (wifiInfo.getBSSID() != null) {
-			// wifi名称
-			String ssid = wifiInfo.getSSID();
-			// wifi信号强度
-			int signalLevel = WifiManager.calculateSignalLevel(
-					wifiInfo.getRssi(), 5);
-			GlobalVariable.g_wifi_level = signalLevel;
-			// wifi速度
-			int speed = wifiInfo.getLinkSpeed();
-			// wifi速度单位
-			String units = WifiInfo.LINK_SPEED_UNITS;
-			Log.i(TAG, "wifi名称: " + ssid + ", wifi信号强度: " + signalLevel + ", wifi速度: " + speed + ", wifi速度单位" + units);
-		}
-	}
-
-	public static boolean isWifiConnected(Context context) {
-		ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo wifiNetworkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		if(wifiNetworkInfo.isConnected()) {
-			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -98,4 +71,138 @@ public class CommonUtil {
 		return -1;
     }
 
+	public static String getAndroidVersion() {
+		int sdk = Build.VERSION.SDK_INT;
+		String version = null;
+		switch (sdk) {
+		case 1:
+			version = "1.0"; // no code name
+			break;
+		case 2:
+			version = "1.1"; // no code name
+			break;
+		case 3:
+			version = "1.5"; // Cupcake(NDK 1)
+			break;
+		case 4:
+			version = "1.6"; // Donut(NDK 2)
+			break;
+		case 5:
+			version = "2.0"; // Eclair
+			break;
+		case 6:
+			version = "2.0.1"; // Eclair
+			break;
+		case 7:
+			version = "2.1"; // Eclair(NDK 3)
+			break;
+		case 8:
+			version = "2.2.x"; // Froyo(NDK 4)
+			break;
+		case 9:
+			version = "2.3 - 2.3.2"; // Gingerbread(NDK 5)
+			break;
+		case 10:
+			version = "2.3.3 - 2.3.7"; // Gingerbread
+			break;
+		case 11:
+			version = "3.0"; // Honeycomb
+			break;
+		case 12:
+			version = "3.1"; // Honeycomb(NDK 6)
+			break;
+		case 13:
+			version = "3.2.x"; // Honeycomb
+			break;
+		case 14:
+			version = "4.0.1 - 4.0.2"; // Ice Cream Sandwich(NDK 7)
+			break;
+		case 15:
+			version = "4.0.3 - 4.0.4"; // Ice Cream Sandwich(NDK 8)
+			break;
+		case 16:
+			version = "4.1.x"; // Jelly Bean
+			break;
+		case 17:
+			version = "4.2.x"; // Jelly Bean
+			break;
+		case 18:
+			version = "4.3.x"; // Jelly Bean
+			break;
+		case 19:
+			version = "4.4 - 4.4.4"; // KitKat
+			break;
+		case 20:
+			version = "4.4W"; // KitKat Watch
+			break;
+		case 21:
+			version = "5.0"; // Lollipop
+			break;
+		case 22:
+			version = "5.1"; // Lollipop
+			break;
+		case 23:
+			version = "6.0"; // Marshmallow
+			break;
+		case 24:
+			version = "7.0"; // Nougat
+			break;
+		case 25:
+			version = "7.1"; // Nougat
+		default:
+			break;
+		}
+		return version;
+	}
+
+	/**
+	 * 升级
+	 * @param context
+	 */
+	public static void upgrade(Context context) {
+		final String curVersion = GlobalVariable.g_currentRunningActivity.getString(R.string.version_name);
+		Intent intent = new Intent(context, DownloadApkIntentService.class);
+		intent.putExtra(Setting.KEY_URL, Setting.UPGRADE_APK_URL);
+		intent.putExtra(Setting.KEY_CURRENT_VERSION, curVersion);
+		intent.putExtra(Setting.KEY_VERSION_URL, Setting.UPGRADE_VERSION_URL);
+		intent.putExtra(Setting.KEY_PACKAGE_NAME, context.getPackageName());
+		intent.putExtra(Setting.KEY_MAIN_ACTIVITY, "life.leek.launcher.DesktopActivity");
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startService(intent);
+	}
+
+	/** 
+     * 软件静默安装 
+     * @param apkAbsolutePath apk文件所在路径 
+     * @return 安装结果:获取到的result值<br> 
+     */  
+    public static boolean silentInstall(String apk_absolute_path, String package_name, String main_activity_name) {
+    	boolean result = false;
+        Process process = null;
+        DataOutputStream os = null;
+		try {
+			process = Runtime.getRuntime().exec("su");
+			os = new DataOutputStream(process.getOutputStream());
+			os.writeBytes("pm install -r " + apk_absolute_path + "\n");
+			os.writeBytes("am start -n " + package_name + "/" + main_activity_name + "\n");
+			os.writeBytes("exit\n");
+
+			os.flush();
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage(), e);
+			result = false;
+		} finally {
+			if (null != os) {
+				try {
+					os.close();
+				} catch (IOException e) {
+				}
+			}
+			if (process != null) {
+				process.destroy();
+			}
+		}
+		result = true;
+        return result;
+    }
 }

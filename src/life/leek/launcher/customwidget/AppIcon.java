@@ -1,7 +1,7 @@
 package life.leek.launcher.customwidget;
 
 import life.leek.launcher.R;
-import life.leek.launcher.setting.DynamicSetting;
+import life.leek.launcher.setting.Setting;
 import life.leek.launcher.utils.CommonUtil;
 import android.content.ComponentName;
 import android.content.Context;
@@ -132,7 +132,7 @@ public class AppIcon extends RelativeLayout {
 	private void setText() {
 		int k = CommonUtil.findApp(m_info.activityInfo.packageName);
 		if (k != -1) {
-			nameTextView.setText(DynamicSetting.APP_ARRAY[1][k]);
+			nameTextView.setText(Setting.APP_ARRAY[1][k]);
 		} else {
 			nameTextView.setText(m_info.loadLabel(mPackageManager));
 		}

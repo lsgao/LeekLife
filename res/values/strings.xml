@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">LeekLife</string>
-    <string name="version_name">1.0.001</string>
+    <string name="version_name">1.0.010</string>
     <string name="imagedescription"></string>
+    <string name="upgrade_tip">桌面程序即将升级,请耐心等待几秒</string>
 
 </resources>

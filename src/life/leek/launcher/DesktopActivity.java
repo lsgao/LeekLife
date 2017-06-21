@@ -6,9 +6,10 @@ import java.util.List;
 import life.leek.launcher.customwidget.AppIcon;
 import life.leek.launcher.customwidget.TitleBar;
 import life.leek.launcher.receiver.UIBroadcastReceiver;
-import life.leek.launcher.setting.DynamicSetting;
 import life.leek.launcher.setting.GlobalVariable;
+import life.leek.launcher.setting.Setting;
 import life.leek.launcher.utils.CommonUtil;
+import life.leek.launcher.utils.NetworkUtil;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -19,6 +20,7 @@ import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class DesktopActivity extends Activity {
@@ -44,13 +46,28 @@ public class DesktopActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         GlobalVariable.g_currentRunningActivity = this;
-        GlobalVariable.g_wifi_connected = CommonUtil.isWifiConnected(this);
+        GlobalVariable.g_wifi_connected = NetworkUtil.isWifiConnected(this);
         if (GlobalVariable.g_wifi_connected) {
-        	CommonUtil.getWifiInfo(this);
+        	NetworkUtil.getWifiInfo(this);
         }
         setContentView(R.layout.activity_desktop);
 
+        String appFilesPath = getApplicationContext().getFilesDir().getAbsolutePath();
+		if (!appFilesPath.endsWith("/")) {
+			appFilesPath += "/";
+		}
+		String files_pattern = "/files/";
+		if (appFilesPath.endsWith(files_pattern)) {
+			appFilesPath = appFilesPath.substring(0, appFilesPath.length()
+					- files_pattern.length());
+			appFilesPath += "/";
+		}
+		GlobalVariable.setApkPath(appFilesPath);
+
+		TextView versionTextView = (TextView) findViewById(R.id.version_desktop);
+		versionTextView.setText(getString(R.string.version_name));
         titleBar = (TitleBar) findViewById(R.id.titlebar_desktop);
+ 
         sendBroadcast();
 
         app1 = (AppIcon) findViewById(R.id.app1_desktop);
@@ -62,6 +79,8 @@ public class DesktopActivity extends Activity {
         app7 = (AppIcon) findViewById(R.id.app7_desktop);
         
         loadApps();
+
+        upgrade();
     }
 
     @Override
@@ -80,14 +99,14 @@ public class DesktopActivity extends Activity {
 
     private void loadApps() {
     	List<ResolveInfo> all_apps = CommonUtil.getAllApps(this);
-    	for(String app_package_name : DynamicSetting.APP_ARRAY[0]) {
+    	for(String app_package_name : Setting.APP_ARRAY[0]) {
     		String[] packageNames = app_package_name.split(",");
     		for (String packageName : packageNames) {
 		        for (ResolveInfo resolveInfo : all_apps) {
 		        	String package_name = resolveInfo.activityInfo.packageName;
 		        	//Log.i(TAG, "应用名称：" + resolveInfo.loadLabel(getPackageManager()) + ", 包名：" + resolveInfo.activityInfo.packageName);
 	
-		        	if (resolveInfo.activityInfo.packageName.equals(DynamicSetting.APP_PACKAGENAME)) {
+		        	if (resolveInfo.activityInfo.packageName.equals(Setting.APP_PACKAGENAME)) {
 		        	} else if(packageName.equals(package_name)) {
 		        		apps.add(resolveInfo);
 		        		break;
@@ -158,7 +177,7 @@ public class DesktopActivity extends Activity {
     	Intent intent = new Intent(this, UIBroadcastReceiver.class);
 		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
 		PendingIntent sender = null;
-		intent.setAction(DynamicSetting.BROADCAST_REFRESH_UI);
+		intent.setAction(Setting.BROADCAST_REFRESH_UI);
 		sender = PendingIntent.getBroadcast(this, 0, intent, 0);
 		am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 				SystemClock.elapsedRealtime(), 5000, sender);
@@ -168,11 +187,17 @@ public class DesktopActivity extends Activity {
     	titleBar.updateTime();
     	titleBar.updateWifiStatus(wifiResId);
     }
+ 
     public void refreshWifiStatus(int resId) {
     	titleBar.updateWifiStatus(resId);
     }
+
     public void refreshTime() {
     	titleBar.updateTime();
+    }
+
+    private void upgrade() {
+		CommonUtil.upgrade(this);
     }
 
 }
