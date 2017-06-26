@@ -51,13 +51,13 @@ public class GlobalVariable {
 		if (null == m_apk_path || ("").equals(m_apk_path)) {
 			String version_release = GlobalVariable.getBuildVersionRelease();
 			if (version_release.startsWith(Setting.ANDROID_4_PREFIX)) {
-				m_apk_path = "/data/data/com.sillatv/";
+				m_apk_path = "/data/data/" + Setting.APP_PACKAGENAME + "/";
 			} else if (version_release.startsWith(Setting.ANDROID_5_PREFIX)) {
-				m_apk_path = "/data/data/com.sillatv/";
+				m_apk_path = "/data/data/" + Setting.APP_PACKAGENAME + "/";
 			} else if (version_release.startsWith(Setting.ANDROID_6_PREFIX)) {
-				m_apk_path = "/data/user/0/com.sillatv/";
+				m_apk_path = "/data/user/0/" + Setting.APP_PACKAGENAME + "/";
 			} else {
-				m_apk_path = "/data/data/com.sillatv/";
+				m_apk_path = "/data/data/" + Setting.APP_PACKAGENAME + "/";
 			}
 		}
 		return m_apk_path;

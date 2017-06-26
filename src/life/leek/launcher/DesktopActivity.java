@@ -181,7 +181,7 @@ public class DesktopActivity extends Activity {
 				app3.setResolveInfo(apps.get(1));
 				app3.setVisibility(View.VISIBLE);
 			}
-			if (app_total > 1) {
+			if (app_total > 2) {
 				app4.setResolveInfo(apps.get(2));
 				app4.setVisibility(View.VISIBLE);
 			}
