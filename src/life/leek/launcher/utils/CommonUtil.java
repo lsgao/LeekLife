@@ -11,6 +11,8 @@ import life.leek.launcher.setting.GlobalVariable;
 import life.leek.launcher.setting.Setting;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.util.Log;
@@ -32,13 +34,34 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 通过包名查找APP
+	 * 判断应用是否安装
+	 * @param context
+	 * @param package_name 应用包名
+	 * @return
+	 */
+	public static boolean isAppInstalled(Context context, String package_name) {
+		final PackageManager packageManager = context.getPackageManager();
+		// 获取所有已安装程序的包信息
+		List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+		if (pinfo != null) {
+			for (int i = 0; i < pinfo.size(); i++) {
+				String pn = pinfo.get(i).packageName;
+				if (pn.equals(package_name)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 通过包名查找APP是否在设置文件中
 	 * @param package_name
 	 * @return
 	 */
 	public static int findApp(String package_name) {
-		for (int i = 0; i < Setting.APP_ARRAY[0].length; i++) {
-			String str = Setting.APP_ARRAY[0][i];
+		for (int i = 0; i < Setting.APPS.length; i++) {
+			String str = Setting.APPS[i][0];
 			String[] packageNames = str.split(",");
 			for (String packageName : packageNames) {
 				if (packageName.equals(package_name)) {
@@ -205,4 +228,5 @@ public class CommonUtil {
 		result = true;
         return result;
     }
+
 }

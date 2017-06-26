@@ -1,9 +1,12 @@
 package life.leek.launcher.setting;
 
+import java.util.List;
+
 import life.leek.launcher.R;
 import life.leek.launcher.utils.CommonUtil;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 
 public class GlobalVariable {
@@ -59,4 +62,6 @@ public class GlobalVariable {
 		}
 		return m_apk_path;
 	}
+
+	public static List<ResolveInfo> g_installedApps = null;
 }

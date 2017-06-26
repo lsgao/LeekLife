@@ -1,20 +1,24 @@
 package life.leek.launcher.customwidget;
 
 import life.leek.launcher.R;
+import life.leek.launcher.setting.GlobalVariable;
 import life.leek.launcher.setting.Setting;
 import life.leek.launcher.utils.CommonUtil;
+import life.leek.launcher.utils.DownloadApkFileManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AppIcon extends RelativeLayout {
 	private Context mParent;
@@ -49,6 +53,44 @@ public class AppIcon extends RelativeLayout {
 		m_index = typedArray.getInteger(R.styleable.AppIcon_index, -1);
 		typedArray.recycle();
 		init(context);
+	}
+
+	public void setStaticInfo(String text, Drawable drawable, final String package_name, final String apk_url) {
+		setFocusable(true);
+		setFocusableInTouchMode(true);
+		nameTextView.setText(text);
+		iconImageView.setImageDrawable(drawable);
+		this.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				// 下载应用
+				DownloadApkFileManager downloadmgr = new DownloadApkFileManager(
+						apk_url,
+						package_name,
+						GlobalVariable.g_currentRunningActivity,
+						new DownloadApkFileManager.ApkFileDownloadingListener() {
+							@Override
+							public void onNetworkFailed() {
+								Toast.makeText(
+										GlobalVariable.g_currentRunningActivity,
+										GlobalVariable.g_currentRunningActivity
+												.getString(R.string.apk_download_err_msg),
+										Toast.LENGTH_SHORT).show();
+							}
+
+							@Override
+							public void onInstallFailed() {
+								Toast.makeText(
+										GlobalVariable.g_currentRunningActivity,
+										GlobalVariable.g_currentRunningActivity
+												.getString(R.string.install_error_msg),
+										Toast.LENGTH_SHORT).show();
+							}
+						});
+				downloadmgr.downloadApkFile();
+			}
+		});
+		invalidate();
 	}
 
 	public void setResolveInfo(ResolveInfo info) {
@@ -132,7 +174,7 @@ public class AppIcon extends RelativeLayout {
 	private void setText() {
 		int k = CommonUtil.findApp(m_info.activityInfo.packageName);
 		if (k != -1) {
-			nameTextView.setText(Setting.APP_ARRAY[1][k]);
+			nameTextView.setText(Setting.APPS[k][1]);
 		} else {
 			nameTextView.setText(m_info.loadLabel(mPackageManager));
 		}
