@@ -143,8 +143,6 @@ public class DesktopActivity extends Activity {
 		setIconInfo(app8, 7);
 		setIconInfo(app9, 8);
 		setIconInfo(app10, 9);
-
-		app1.requestFocus();
 	}
 
 	private void setIconInfo(AppIcon app_icon, int pos) {
