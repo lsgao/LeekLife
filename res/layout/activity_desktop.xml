@@ -71,79 +71,113 @@
 
             <life.leek.launcher.customwidget.AppIcon
                 android:id="@+id/app1_desktop"
-                android:layout_width="300dp"
-                android:layout_height="490dp"
+                android:layout_width="290dp"
+                android:layout_height="470dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/app1"
-                android:visibility="gone"
+                android:visibility="visible"
                 attr:index="1" />
 
             <life.leek.launcher.customwidget.AppIcon
                 android:id="@+id/app2_desktop"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="205dp"
+                android:layout_height="175dp"
+                android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@+id/app1_desktop"
                 android:background="@drawable/app2"
-                android:visibility="gone"
+                android:visibility="visible"
                 attr:index="2" />
 
             <life.leek.launcher.customwidget.AppIcon
                 android:id="@+id/app3_desktop"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="205dp"
+                android:layout_height="175dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/app2_desktop"
                 android:background="@drawable/app3"
-                android:visibility="gone"
+                android:visibility="visible"
                 attr:index="3" />
 
             <life.leek.launcher.customwidget.AppIcon
                 android:id="@+id/app4_desktop"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="205dp"
+                android:layout_height="175dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/app3_desktop"
                 android:background="@drawable/app4"
-                android:visibility="gone"
+                android:visibility="visible"
                 attr:index="4" />
 
             <life.leek.launcher.customwidget.AppIcon
                 android:id="@+id/app5_desktop"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_below="@+id/app2_desktop"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/app1_desktop"
+                android:layout_width="205dp"
+                android:layout_height="175dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/app4_desktop"
                 android:background="@drawable/app5"
-                android:visibility="gone"
+                android:visibility="visible"
                 attr:index="5" />
 
             <life.leek.launcher.customwidget.AppIcon
                 android:id="@+id/app6_desktop"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_below="@+id/app3_desktop"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/app5_desktop"
+                android:layout_width="415dp"
+                android:layout_height="175dp"
+                android:layout_below="@+id/app2_desktop"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/app1_desktop"
                 android:background="@drawable/app6"
-                android:visibility="gone"
+                android:visibility="visible"
                 attr:index="6" />
 
             <life.leek.launcher.customwidget.AppIcon
                 android:id="@+id/app7_desktop"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
+                android:layout_width="205dp"
+                android:layout_height="175dp"
                 android:layout_below="@+id/app4_desktop"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/app6_desktop"
                 android:background="@drawable/app7"
-                android:visibility="gone"
+                android:visibility="visible"
                 attr:index="7" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app8_desktop"
+                android:layout_width="205dp"
+                android:layout_height="175dp"
+                android:layout_below="@+id/app5_desktop"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/app7_desktop"
+                android:background="@drawable/app8"
+                android:visibility="visible"
+                attr:index="8" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app9_desktop"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_below="@+id/app6_desktop"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@+id/app1_desktop"
+                android:background="@drawable/app9"
+                android:visibility="visible"
+                attr:index="9" />
+
+            <life.leek.launcher.customwidget.AppIcon
+                android:id="@+id/app10_desktop"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_below="@+id/app6_desktop"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@+id/app9_desktop"
+                android:background="@drawable/app10"
+                android:visibility="visible"
+                attr:index="10" />
         </RelativeLayout>
     </RelativeLayout>
 

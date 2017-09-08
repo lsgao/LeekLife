@@ -1,5 +1,8 @@
 package life.leek.launcher.setting;
 
+import life.leek.launcher.customwidget.AppIcon;
+import android.provider.Settings;
+
 public class Setting {
 	public final static String APP_PACKAGENAME = "life.leek.launcher";
 //	public final static String[][] APP_ARRAY = { 
@@ -12,12 +15,67 @@ public class Setting {
 //		},
 //		{ "신라TV", "인테넷테스트", "앱스토어", "설정", "중국TV", "기타앱" } };
 	public final static String[][] APPS = { 
-		{"com.sillatv", "신라TV", "http://update.sillatv.com/AndroidBox/update/SillaTV.apk", "sillatv"},// 신라티비
-		{"tv.tool.netspeedtest", "인테넷테스트"}, // 网络测速
-		{"com.dangbeimarket", "앱스토어"}, // 当贝市场
-		{"com.android.settings,com.android.tv.settings", "설정"}, // 设置
-		{"com.elinkway.tvlive2", "중국TV"}, // 电视家
-		{"com.dangbei.myapp", "기타앱"} // 我的应用
+			{// 신라티비
+				  "com.sillatv"
+				, "신라TV"
+				, "http://update.sillatv.com/AndroidBox/update/SillaTV.apk"
+				, "icon_sillatv"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// 网络测速
+				  "tv.tool.netspeedtest"
+				, "网络测速"
+				, "http://www.skytv365.com/app/BoxPlayerLauncher/wlcs.apk"
+				, "icon_wlcs"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// 电视家
+				  "com.elinkway.tvlive2"
+				, "电视家"
+				, "http://www.skytv365.com/app/BoxPlayerLauncher/dsj.apk"
+				, "icon_dsj"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// "聚体育"
+				  "com.pptv.tvsports"
+				, "聚体育"
+				, "http://www.skytv365.com/app/BoxPlayerLauncher/jty.apk"
+				, "icon_jty"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// "小薇直播"
+				  "com.vst.live"
+				, "小薇直播"
+				, "http://www.skytv365.com/app/BoxPlayerLauncher/xwzb.apk"
+				, "icon_xwzb"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// 当贝市场
+				  "com.dangbeimarket"
+				, "当贝市场"
+				, "http://www.skytv365.com/app/BoxPlayerLauncher/dbsc.apk"
+				, "icon_dbsc"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// "电视猫视频"
+				  "com.moretv.android"
+				, "电视猫视频"
+				, "http://www.skytv365.com/app/BoxPlayerLauncher/dsmsp.apk"
+				, "icon_dsmsp"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// "蜜蜂视频"
+				  "cn.beevideo"
+				, "蜜蜂视频"
+				, "http://www.skytv365.com/app/BoxPlayerLauncher/mfsp.apk"
+				, "icon_mfsp"
+				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// 设置
+				  Settings.ACTION_SETTINGS
+				, "设置"
+				, Settings.ACTION_SETTINGS
+				, "icon_setting"
+				, String.valueOf(AppIcon.TYPE_SYSTEM)
+			} , {// 我的应用
+				  "com.dangbei.myapp"
+				, "我的应用"
+				, "http://www.skytv365.com/app/wdyy.apk"
+				, "icon_apps"
+				, String.valueOf(AppIcon.TYPE_USER)
+			}
 	};
 	// 日期时间显示格式 - 当前时间格式
 	public final static String FORMAT_CURRENT_TIME = "HH:mm";

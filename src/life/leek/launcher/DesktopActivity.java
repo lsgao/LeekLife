@@ -19,14 +19,12 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.View;
 import android.widget.TextView;
 
 public class DesktopActivity extends Activity {
 	@SuppressWarnings("unused")
 	private static final String TAG = "DesktopActivity";
 
-	private List<ResolveInfo> apps = new ArrayList<ResolveInfo>();
 	TitleBar titleBar;
 	AppIcon app1;
 	AppIcon app2;
@@ -35,7 +33,11 @@ public class DesktopActivity extends Activity {
 	AppIcon app5;
 	AppIcon app6;
 	AppIcon app7;
+	AppIcon app8;
+	AppIcon app9;
+	AppIcon app10;
 
+	List<ResolveInfo> apps = new ArrayList<ResolveInfo>();
 	@Override
 	public void onBackPressed() {
 		return;
@@ -77,6 +79,9 @@ public class DesktopActivity extends Activity {
 		app5 = (AppIcon) findViewById(R.id.app5_desktop);
 		app6 = (AppIcon) findViewById(R.id.app6_desktop);
 		app7 = (AppIcon) findViewById(R.id.app7_desktop);
+		app8 = (AppIcon) findViewById(R.id.app8_desktop);
+		app9 = (AppIcon) findViewById(R.id.app9_desktop);
+		app10 = (AppIcon) findViewById(R.id.app10_desktop);
 
 		loadApps();
 
@@ -110,123 +115,50 @@ public class DesktopActivity extends Activity {
 			apps.clear();
 			apps = new ArrayList<ResolveInfo>();
 		}
+
 		for (int i = 0; i < Setting.APPS.length; i++) {
 			String app_package_name = Setting.APPS[i][0];
 			String[] packageNames = app_package_name.split(",");
-			for (String packageName : packageNames) {
-				for (ResolveInfo resolveInfo : GlobalVariable.g_installedApps) {
-					String package_name = resolveInfo.activityInfo.packageName;
-					// Log.i(TAG, "应用名称：" +
-					// resolveInfo.loadLabel(getPackageManager()) + ", 包名：" +
-					// resolveInfo.activityInfo.packageName);
-
-					if (resolveInfo.activityInfo.packageName
-							.equals(Setting.APP_PACKAGENAME)) {
-					} else if (packageName.equals(package_name)) {
-						apps.add(resolveInfo);
-						break;
+			for (int k = 0; k < packageNames.length; k ++) {
+				String packageName = packageNames[k];
+				ResolveInfo resolveInfo = CommonUtil.getInstalledApp(this, packageName);
+				if (null != resolveInfo) {
+					apps.add(resolveInfo);
+					break;
+				} else {
+					if (k == (packageNames.length - 1)) {
+						apps.add(null);
 					}
 				}
 			}
 		}
-		boolean app1_installed = false;
-		app1_installed = CommonUtil.isAppInstalled(this, Setting.APPS[0][0]);
 
-		int app_total = apps.size();
-		if (app1_installed) {
-			if (app_total > 0) {
-				app1.setResolveInfo(apps.get(0));
-				app1.setVisibility(View.VISIBLE);
-				app1.requestFocus();
-			}
-			if (app_total > 1) {
-				app2.setResolveInfo(apps.get(1));
-				app2.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 2) {
-				app3.setResolveInfo(apps.get(2));
-				app3.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 3) {
-				app4.setResolveInfo(apps.get(3));
-				app4.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 4) {
-				app5.setResolveInfo(apps.get(4));
-				app5.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 5) {
-				app6.setResolveInfo(apps.get(5));
-				app6.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 6) {
-				app7.setResolveInfo(apps.get(6));
-				app7.setVisibility(View.VISIBLE);
-			}
-		} else {
-			app1.setStaticInfo(
-					Setting.APPS[0][1],
-					getResources().getDrawable(
-							CommonUtil
-									.getDrawableResourceId(Setting.APPS[0][3])),
-					Setting.APPS[0][0], Setting.APPS[0][2]);
-			app1.setVisibility(View.VISIBLE);
-			app1.requestFocus();
+		setIconInfo(app1, 0);
+		setIconInfo(app2, 1);
+		setIconInfo(app3, 2);
+		setIconInfo(app4, 3);
+		setIconInfo(app5, 4);
+		setIconInfo(app6, 5);
+		setIconInfo(app7, 6);
+		setIconInfo(app8, 7);
+		setIconInfo(app9, 8);
+		setIconInfo(app10, 9);
 
-			if (app_total > 0) {
-				app2.setResolveInfo(apps.get(0));
-				app2.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 1) {
-				app3.setResolveInfo(apps.get(1));
-				app3.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 2) {
-				app4.setResolveInfo(apps.get(2));
-				app4.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 3) {
-				app5.setResolveInfo(apps.get(3));
-				app5.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 4) {
-				app6.setResolveInfo(apps.get(4));
-				app6.setVisibility(View.VISIBLE);
-			}
-			if (app_total > 5) {
-				app7.setResolveInfo(apps.get(5));
-				app7.setVisibility(View.VISIBLE);
-			}
-		}
-		// switch (app_total) {
-		// case 0:
-		// app1.setVisibility(View.VISIBLE);
-		// break;
-		// case 1:
-		// app2.setVisibility(View.VISIBLE);
-		// break;
-		// case 2:
-		// app3.setVisibility(View.VISIBLE);
-		// break;
-		// case 3:
-		// app4.setVisibility(View.VISIBLE);
-		// break;
-		// case 4:
-		// app5.setVisibility(View.VISIBLE);
-		// break;
-		// case 5:
-		// app6.setVisibility(View.VISIBLE);
-		// break;
-		// case 6:
-		// app7.setVisibility(View.VISIBLE);
-		// break;
-		// default :
-		// app7.setVisibility(View.VISIBLE);
-		// break;
-		// }
-
+		app1.requestFocus();
 	}
 
+	private void setIconInfo(AppIcon app_icon, int pos) {
+		if (null != apps.get(pos)) {
+			app_icon.setResolveInfo(apps.get(pos));
+			app_icon.setOnClickListener(AppIcon.ONCLICK_TYPE_RUN_APP);
+		} else {
+			if (app_icon.getType() == AppIcon.TYPE_SYSTEM) {
+				app_icon.setOnClickListener(AppIcon.ONCLICK_TYPE_RUN_SYSTEM);
+			} else {
+				app_icon.setOnClickListener(AppIcon.ONCLICK_TYPE_DOWNLOAD_APP);
+			}
+		}
+	}
 	private void sendBroadcast() {
 		Intent intent = new Intent(this, UIBroadcastReceiver.class);
 		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);

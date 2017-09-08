@@ -150,6 +150,7 @@ public class DownloadApkFileManager {
 				try {
 					isDownloadSucceed = download();
 				} catch (Exception e) {
+					pBar.dismiss();
 					listener.onNetworkFailed();
 					Log.e(TAG, e.getMessage(), e);
 				}
@@ -209,6 +210,7 @@ public class DownloadApkFileManager {
 			is.close();
 			isDownloadSucceed = true;
 		} catch (Exception e) {
+			pBar.dismiss();
 			listener.onNetworkFailed();
 			Log.e(TAG, e.getMessage(), e);
 		}

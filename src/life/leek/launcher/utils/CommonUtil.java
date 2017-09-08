@@ -34,6 +34,28 @@ public class CommonUtil {
 	}
 
 	/**
+	 * 获取已安装的指定包名的APP
+	 * @param context
+	 * @return
+	 */
+	public static ResolveInfo getInstalledApp(Context context, String package_name) {
+		if ( null == package_name || package_name.equals("")) {
+			return null;
+		}
+		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+		if (null == GlobalVariable.g_installedApps) {
+			GlobalVariable.g_installedApps = CommonUtil.getAllApps(context);
+		}
+		for (ResolveInfo resolveInfo :  GlobalVariable.g_installedApps) {
+			if (resolveInfo.activityInfo.packageName.equals(package_name)) {
+				return resolveInfo;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * 判断应用是否安装
 	 * @param context
 	 * @param package_name 应用包名
