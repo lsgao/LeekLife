@@ -24,43 +24,43 @@ public class Setting {
 			} , {// 网络测速
 				  "tv.tool.netspeedtest"
 				, "网络测速"
-				, "http://www.skytv365.com/app/BoxPlayerLauncher/wlcs.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/wlcs.apk"
 				, "icon_wlcs"
 				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// 电视家
 				  "com.elinkway.tvlive2"
 				, "电视家"
-				, "http://www.skytv365.com/app/BoxPlayerLauncher/dsj.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/dsj.apk"
 				, "icon_dsj"
 				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// "聚体育"
 				  "com.pptv.tvsports"
 				, "聚体育"
-				, "http://www.skytv365.com/app/BoxPlayerLauncher/jty.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/jty.apk"
 				, "icon_jty"
 				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// "小薇直播"
 				  "com.vst.live"
 				, "小薇直播"
-				, "http://www.skytv365.com/app/BoxPlayerLauncher/xwzb.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/xwzb.apk"
 				, "icon_xwzb"
 				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// 当贝市场
 				  "com.dangbeimarket"
 				, "当贝市场"
-				, "http://www.skytv365.com/app/BoxPlayerLauncher/dbsc.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/dbsc.apk"
 				, "icon_dbsc"
 				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// "电视猫视频"
 				  "com.moretv.android"
 				, "电视猫视频"
-				, "http://www.skytv365.com/app/BoxPlayerLauncher/dsmsp.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/dsmsp.apk"
 				, "icon_dsmsp"
 				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// "蜜蜂视频"
 				  "cn.beevideo"
 				, "蜜蜂视频"
-				, "http://www.skytv365.com/app/BoxPlayerLauncher/mfsp.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/mfsp.apk"
 				, "icon_mfsp"
 				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// 设置
@@ -72,7 +72,7 @@ public class Setting {
 			} , {// 我的应用
 				  "com.dangbei.myapp"
 				, "我的应用"
-				, "http://www.skytv365.com/app/wdyy.apk"
+				, "http://update.leekleek.com/LeekLife-App/apps/wdyy.apk"
 				, "icon_apps"
 				, String.valueOf(AppIcon.TYPE_USER)
 			}
