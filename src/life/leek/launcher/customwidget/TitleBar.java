@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TitleBar extends FrameLayout {
-	public static String TAG = "TitleBar";
+	public static String TAG = TitleBar.class.getName();
 	private View mContentView;
 	TextView timeTextView;
 	ImageView wifiImageView;

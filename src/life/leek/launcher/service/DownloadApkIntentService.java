@@ -34,7 +34,7 @@ public class DownloadApkIntentService extends IntentService {
 		super(name);
 	}
 
-	public final static String TAG = "DownloadApkIntentService";
+	public final static String TAG = DownloadApkIntentService.class.getName();
 
 	private static final int DOWNLOAD_ERROR = -1;
 	private static final int DOWNLOAD_STARTED = 0;

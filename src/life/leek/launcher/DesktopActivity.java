@@ -23,19 +23,11 @@ import android.widget.TextView;
 
 public class DesktopActivity extends Activity {
 	@SuppressWarnings("unused")
-	private static final String TAG = "DesktopActivity";
+	private static final String TAG = DesktopActivity.class.getName();
 
 	TitleBar titleBar;
-	AppIcon app1;
-	AppIcon app2;
-	AppIcon app3;
-	AppIcon app4;
-	AppIcon app5;
-	AppIcon app6;
-	AppIcon app7;
-	AppIcon app8;
-	AppIcon app9;
-	AppIcon app10;
+	List<AppIcon> appList = new ArrayList<AppIcon>();
+
 
 	List<ResolveInfo> apps = new ArrayList<ResolveInfo>();
 	@Override
@@ -72,16 +64,17 @@ public class DesktopActivity extends Activity {
 
 		sendBroadcast();
 
-		app1 = (AppIcon) findViewById(R.id.app1_desktop);
-		app2 = (AppIcon) findViewById(R.id.app2_desktop);
-		app3 = (AppIcon) findViewById(R.id.app3_desktop);
-		app4 = (AppIcon) findViewById(R.id.app4_desktop);
-		app5 = (AppIcon) findViewById(R.id.app5_desktop);
-		app6 = (AppIcon) findViewById(R.id.app6_desktop);
-		app7 = (AppIcon) findViewById(R.id.app7_desktop);
-		app8 = (AppIcon) findViewById(R.id.app8_desktop);
-		app9 = (AppIcon) findViewById(R.id.app9_desktop);
-		app10 = (AppIcon) findViewById(R.id.app10_desktop);
+		appList.add((AppIcon) findViewById(R.id.app1_desktop));
+		appList.add((AppIcon) findViewById(R.id.app2_desktop));
+		appList.add((AppIcon) findViewById(R.id.app3_desktop));
+		appList.add((AppIcon) findViewById(R.id.app4_desktop));
+		appList.add((AppIcon) findViewById(R.id.app5_desktop));
+		appList.add((AppIcon) findViewById(R.id.app6_desktop));
+		appList.add((AppIcon) findViewById(R.id.app7_desktop));
+		appList.add((AppIcon) findViewById(R.id.app8_desktop));
+		appList.add((AppIcon) findViewById(R.id.app9_desktop));
+		appList.add((AppIcon) findViewById(R.id.app10_desktop));
+		appList.add((AppIcon) findViewById(R.id.app11_desktop));
 
 		loadApps();
 
@@ -111,6 +104,9 @@ public class DesktopActivity extends Activity {
 
 	private void loadApps() {
 		GlobalVariable.g_installedApps = CommonUtil.getAllApps(this);
+//		for (ResolveInfo info : GlobalVariable.g_installedApps) {
+//			Log.i(TAG, info.activityInfo.name + " --- " + info.activityInfo.packageName);
+//		}
 		if (null != apps) {
 			apps.clear();
 			apps = new ArrayList<ResolveInfo>();
@@ -133,16 +129,10 @@ public class DesktopActivity extends Activity {
 			}
 		}
 
-		setIconInfo(app1, 0);
-		setIconInfo(app2, 1);
-		setIconInfo(app3, 2);
-		setIconInfo(app4, 3);
-		setIconInfo(app5, 4);
-		setIconInfo(app6, 5);
-		setIconInfo(app7, 6);
-		setIconInfo(app8, 7);
-		setIconInfo(app9, 8);
-		setIconInfo(app10, 9);
+		for (int i = 0; i < appList.size(); i ++) {
+			setIconInfo(appList.get(i), i);
+		}
+
 	}
 
 	private void setIconInfo(AppIcon app_icon, int pos) {

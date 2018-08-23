@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 public class AppIcon extends RelativeLayout {
 	@SuppressWarnings("unused")
-	private static final String TAG = "AppIcon";
+	private static final String TAG = AppIcon.class.getName();
 
 	public static final int ONCLICK_TYPE_DOWNLOAD_APP = 0;
 	public static final int ONCLICK_TYPE_RUN_APP = 1;

@@ -18,7 +18,7 @@ import android.os.Build;
 import android.util.Log;
 
 public class CommonUtil {
-	public static String TAG = "CommonUtil";
+	public static String TAG = CommonUtil.class.getName();
 
 	/**
 	 * 获取所有APP

@@ -45,6 +45,12 @@ public class Setting {
 				, "http://update.leekleek.com/LeekLife-App/apps/xwzb.apk"
 				, "icon_xwzb"
 				, String.valueOf(AppIcon.TYPE_USER)
+			} , {// 乐播投屏
+				  "com.hpplay.happyplay.aw"
+				, "乐播投屏"
+				, "http://update.leekleek.com/LeekLife-App/apps/lbtp.apk"
+				, "icon_lbtp"
+				, String.valueOf(AppIcon.TYPE_USER)
 			} , {// 当贝市场
 				  "com.dangbeimarket"
 				, "当贝市场"
